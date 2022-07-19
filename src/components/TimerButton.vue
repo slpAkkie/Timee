@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-[150px] h-[150px] mx-auto rounded-full overflow-hidden bg-white cursor-pointer select-none timee-transition"
+    class="w-[150px] h-[150px] mx-auto rounded-full overflow-hidden bg-white cursor-pointer select-none timee-transition-all"
     :class="{
       'p-0.5': !isStarted,
       'hover:p-1': !isStarted,

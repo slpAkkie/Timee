@@ -8,11 +8,15 @@
     <section>
       <TaskForm @task:create="addTask" />
     </section>
+    <section>
+      <TaskList />
+    </section>
   </div>
 </template>
 
 <script lang="ts">
 import TaskForm from '@/components/TaskForm.vue'
+import TaskList from '@/components/TaskList.vue'
 import TimeeButton from '@/components/TimeeButton.vue'
 import TimerButton from '@/components/TimerButton.vue'
 import { Options, Vue } from 'vue-class-component'
@@ -28,9 +32,15 @@ import { Task } from '../global'
     TimerButton,
     TimeeButton,
     TaskForm,
+    TaskList,
   },
 })
 export default class TimerView extends Vue {
+  // Refs
+  declare $refs: {
+    timerButton: TimerButton,
+  }
+
   // Data
   startedAt: number | undefined
   currentTime: number | undefined
@@ -67,7 +77,7 @@ export default class TimerView extends Vue {
   }
 
   clear() {
-    if (this.startedAt && !this.stopedAt) (this.$refs.timerButton as TimerButton).toggle()
+    if (this.startedAt && !this.stopedAt) this.$refs.timerButton.toggle()
 
     this.reset()
   }

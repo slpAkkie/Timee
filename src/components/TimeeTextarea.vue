@@ -1,8 +1,8 @@
 <template>
   <div>
-    <input type="text"
+    <textarea rows="3"
       class="w-full text-zinc-300 bg-zinc-700 border-2 border-zinc-700 focus:border-blue-500 focus:ring-blue-500 rounded py-1 px-2 placeholder:text-zinc-500 timee-transition"
-      :placeholder="placeholder" v-model="inputVal" />
+      v-model="inputVal" :placeholder="placeholder"></textarea>
   </div>
 </template>
 
@@ -13,7 +13,6 @@ class Props {
   modelValue!: string
   type = prop<string>({ default: 'text' })
   placeholder = prop<string>({ default: '' })
-  maxLength = prop<number>({ default: null })
 }
 
 @Options({
@@ -22,19 +21,12 @@ class Props {
     modelValue(newVal, oldVal) {
       if (newVal !== oldVal) this.inputVal = newVal
     },
-    inputVal(newVal, oldVal) {
-      if (!this.maxLength || newVal.length <= this.maxLength) {
-        this.$emit(
-          'update:modelValue',
-          (this.inputVal = newVal)
-        )
-      } else {
-        this.$emit('update:modelValue', (this.inputVal = oldVal))
-      }
+    inputVal(newVal) {
+      this.$emit('update:modelValue', this.inputVal = newVal)
     }
   },
 })
-export default class TimeeInput extends Vue.with(Props) {
+export default class TimeeTextarea extends Vue.with(Props) {
   // Data
   inputVal: string = ''
 

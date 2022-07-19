@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    outline-offset: 0 !important;
+    outline: none !important;
+    outline-color: transparent !important;
+}
+
 .timee-transition {
+    @apply transition;
+    @apply duration-150;
+}
+
+.timee-transition-all {
     @apply transition-all;
     @apply duration-150;
 }
