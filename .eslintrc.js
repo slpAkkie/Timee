@@ -21,4 +21,13 @@ module.exports = {
     'comma-dangle': ['error', 'only-multiline'],
     'quote-props': ['error', 'consistent'],
   },
+  'overrides': [
+    {
+      'files': ['*.js', '*.vue'],
+      'rules': {
+        '@typescript-eslint/no-inferrable-types': ['off'],
+        'space-before-function-paren': ['error', 'never'],
+      },
+    }
+  ],
 }
