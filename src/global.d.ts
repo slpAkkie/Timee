@@ -1,11 +1,10 @@
-export declare class Task {
-  startedAt: Date
-  stopedAt: Date | undefined
-
-  duration: number
+export declare type Task = {
+  uid: number
 
   title: string
   description: string
+
+  isFinished: boolean
 }
 
 export { }

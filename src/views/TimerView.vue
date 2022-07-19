@@ -5,11 +5,11 @@
       <p class="my-5 text-2xl font-bold">{{ duration }}</p>
       <TimeeButton value="Clear" @click="clear" />
     </section>
-    <section>
+    <section v-if="startedAt && timerInterval">
       <TaskForm @task:create="addTask" />
     </section>
     <section>
-      <TaskList />
+      <TaskList :items="tasks" />
     </section>
   </div>
 </template>
@@ -20,13 +20,14 @@ import TaskList from '@/components/TaskList.vue'
 import TimeeButton from '@/components/TimeeButton.vue'
 import TimerButton from '@/components/TimerButton.vue'
 import { Options, Vue } from 'vue-class-component'
-import { Task } from '../global'
+import { Task } from '@/global'
 
 @Options({
   data: () => ({
     startedAt: undefined,
     stopedAt: undefined,
     currentTime: undefined,
+    timerInterval: undefined,
   }),
   components: {
     TimerButton,
@@ -73,17 +74,27 @@ export default class TimerView extends Vue {
 
   stop() {
     this.stopedAt = Date.now()
-    this.timerInterval && clearInterval(this.timerInterval)
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval)
+      this.timerInterval = undefined
+    }
+
+    const currentTask: Task = this.tasks[0]
+    if (currentTask) currentTask.isFinished = true
   }
 
   clear() {
+    if (!this.startedAt) this.tasks = []
     if (this.startedAt && !this.stopedAt) this.$refs.timerButton.toggle()
 
     this.reset()
   }
 
-  addTask() {
-    //
+  addTask(data: Task) {
+    const currentTask: Task = this.tasks[0]
+    if (currentTask) currentTask.isFinished = true
+
+    this.tasks.unshift(data)
   }
 
   parseTime(val: number) {

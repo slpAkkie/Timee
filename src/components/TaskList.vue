@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-2">
-    <TaskCard v-for="(task, i) in items" :key="`${task}${i}`" :data="task" />
+    <TaskCard v-for="task in items" :key="task.uid" :data="task" />
   </div>
 </template>
 
