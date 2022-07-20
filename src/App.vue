@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-zinc-800 text-white min-h-screen">
+  <main class="bg-zinc-800 text-white min-h-screen px-4">
     <router-view />
   </main>
 </template>
