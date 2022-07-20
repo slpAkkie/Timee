@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto pt-5 flex flex-col gap-5 text-center">
+  <div class="container max-w-2xl mx-auto pt-5 flex flex-col gap-5 text-center">
     <section>
       <TimerButton @timer:start="start" @timer:stop="stop" ref="timerButton" />
       <p class="my-5 text-2xl font-bold">{{ duration }}</p>
@@ -101,8 +101,8 @@ export default class TimerView extends Vue {
     const ms = Math.round(val % 1000 / 10)
     val = Math.round(val / 1000)
     const s = val % 60
-    const m = (val -= s) % 60
-    const h = (val -= m) % 60
+    const m = (val -= s) / 60 % 60
+    const h = (val -= m * 60) / 60
 
     return `${h} часов ${m} минут ${s.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')} секунд`
   }
