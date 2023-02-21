@@ -1,42 +1,42 @@
-## Timee
+# Timee
 
-I am glad to present you the Timee - Simple time tracker for your tasks
+Простой тайм-трекер для ваших задач
 
-### Features
+## Возможности
 
-- Track your time
-- Create tasks and track time for it simultaneously with main time tracker
-- Dont carry about stop task timer when creating new one. It will be automatically stopped
-- Clear timer and tasks if needed and start new one
+- Отслеживайте свое время по задачам
+- Создавайте задачи и отслеживайте их время одновременно с общим временем выполнения
+- Не нужно заботиться о том, чтобы останавливать таймер перед началом новой задачи.
+- Очистите таймер и начните заново
 
-### Project setup
+## Установка проекта
 
-Install npm dependencies
+Установка зависимостей
 
-```
+```sh
 npm install
 ```
 
-#### Compiles and hot-reloads for development
+### Компиляция и минификация для разработки
 
-To run local development server use
+Для запуска локального сервера разработки
 
-```
+```sh
 npm run serve
 ```
 
-#### Compiles and minifies for production
+### Компиляция и минификация для продакшена
 
-To build project into production use
+Для сборки проекта в продакшен
 
-```
+```sh
 npm run build
 ```
 
-## Author
+## Автор
 
 Alexandr Shamanin (@slpAkkie)
 
-## Version
+## Версия
 
 1.0.1
