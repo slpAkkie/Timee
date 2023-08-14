@@ -98,13 +98,12 @@ export default class TimerView extends Vue {
   }
 
   parseTime(val: number) {
-    const ms = Math.round(val % 1000 / 10)
-    val = Math.round(val / 1000)
-    const s = val % 60
-    const m = (val -= s) / 60 % 60
-    const h = (val -= m * 60) / 60
+    const ms = Math.round(val % 1000)
+    const s = (val = (val - ms) / 1000) % 60
+    const m = (val = (val - s) / 60) % 60
+    const h = (val - m) / 60
 
-    return `${h} часов ${m} минут ${s.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')} секунд`
+    return `${h} часов ${m} минут ${s.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')} секунд`
   }
 
   updateTimer() {
