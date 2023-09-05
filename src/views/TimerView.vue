@@ -15,12 +15,12 @@
 </template>
 
 <script lang="ts">
-import TaskForm from '@/components/TaskForm.vue'
-import TaskList from '@/components/TaskList.vue'
-import TimeeButton from '@/components/TimeeButton.vue'
-import TimerButton from '@/components/TimerButton.vue'
-import { Options, Vue } from 'vue-class-component'
-import { Task } from '@/global'
+import TaskForm from "@/components/TaskForm.vue";
+import TaskList from "@/components/TaskList.vue";
+import TimeeButton from "@/components/TimeeButton.vue";
+import TimerButton from "@/components/TimerButton.vue";
+import { Options, Vue } from "vue-class-component";
+import { Task } from "@/global";
 
 @Options({
   data: () => ({
@@ -39,75 +39,80 @@ import { Task } from '@/global'
 export default class TimerView extends Vue {
   // Refs
   declare $refs: {
-    timerButton: TimerButton,
-  }
+    timerButton: TimerButton;
+  };
 
   // Data
-  startedAt: number | undefined
-  currentTime: number | undefined
-  stopedAt: number | undefined
+  startedAt: number | undefined;
+  currentTime: number | undefined;
+  stopedAt: number | undefined;
 
-  timerInterval: number | undefined
+  timerInterval: number | undefined;
 
-  tasks: Array<Task> = new Array<Task>()
+  tasks: Array<Task> = new Array<Task>();
 
   // Computed
   get duration() {
-    if (!this.startedAt) return 'Timer isn\'t running'
-    const duration = Math.round(((this.stopedAt || this.currentTime || this.startedAt) - this.startedAt))
+    if (!this.startedAt) return "Timer isn't running";
+    const duration = Math.round(
+      (this.stopedAt || this.currentTime || this.startedAt) - this.startedAt
+    );
 
-    return `Прошло: ${this.parseTime(duration)}`
+    return `Прошло: ${this.parseTime(duration)}`;
   }
 
   // Methods
   reset() {
-    this.startedAt = undefined
-    this.currentTime = undefined
-    this.stopedAt = undefined
+    this.startedAt = undefined;
+    this.currentTime = undefined;
+    this.stopedAt = undefined;
   }
 
   start() {
-    this.reset()
-    this.startedAt = Date.now()
-    this.timerInterval = setInterval(this.updateTimer, 10)
+    this.reset();
+    this.startedAt = Date.now();
+    this.timerInterval = setInterval(this.updateTimer, 10);
   }
 
   stop() {
-    this.stopedAt = Date.now()
+    this.stopedAt = Date.now();
     if (this.timerInterval) {
-      clearInterval(this.timerInterval)
-      this.timerInterval = undefined
+      clearInterval(this.timerInterval);
+      this.timerInterval = undefined;
     }
 
-    const currentTask: Task = this.tasks[0]
-    if (currentTask) currentTask.isFinished = true
+    const currentTask: Task = this.tasks[0];
+    if (currentTask) currentTask.isFinished = true;
   }
 
   clear() {
-    if (!this.startedAt) this.tasks = []
-    if (this.startedAt && !this.stopedAt) this.$refs.timerButton.toggle()
+    if (!this.startedAt) this.tasks = [];
+    if (this.startedAt && !this.stopedAt) this.$refs.timerButton.toggle();
 
-    this.reset()
+    this.reset();
   }
 
   addTask(data: Task) {
-    const currentTask: Task = this.tasks[0]
-    if (currentTask) currentTask.isFinished = true
+    const currentTask: Task = this.tasks[0];
+    if (currentTask) currentTask.isFinished = true;
 
-    this.tasks.unshift(data)
+    this.tasks.unshift(data);
   }
 
   parseTime(val: number) {
-    const ms = Math.round(val % 1000)
-    const s = (val = (val - ms) / 1000) % 60
-    const m = (val = (val - s) / 60) % 60
-    const h = (val - m) / 60
+    const ms = Math.round(val % 1000);
+    const s = (val = (val - ms) / 1000) % 60;
+    const m = (val = (val - s) / 60) % 60;
+    const h = (val - m) / 60;
 
-    return `${h} часов ${m} минут ${s.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')} секунд`
+    return `${h} часов ${m} минут ${s.toString().padStart(2, "0")}.${ms
+      .toString()
+      .slice(0, 3)
+      .padStart(3, "0")} секунд`;
   }
 
   updateTimer() {
-    this.currentTime = Date.now()
+    this.currentTime = Date.now();
   }
 }
 </script>

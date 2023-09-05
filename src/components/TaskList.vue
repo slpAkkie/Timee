@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import { Options, prop, Vue } from 'vue-class-component'
-import TaskCard from './TaskCard.vue'
+import { Options, prop, Vue } from "vue-class-component";
+import TaskCard from "./TaskCard.vue";
 
 class Props {
-  items = prop<Array<Record<string, unknown>>>({ default: () => [] })
+  items = prop<Array<Record<string, unknown>>>({ default: () => [] });
 }
 
 @Options({
@@ -22,5 +22,4 @@ export default class TaskList extends Vue.with(Props) {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
